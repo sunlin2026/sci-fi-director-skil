@@ -32,7 +32,7 @@ def analyze_with_ai(script_text):
     """
     
     payload = {
-        "model": "deepseek-chat", # 如果用豆包，改为 "doubao-pro"
+        "model": "deepseek-v4-flash",", # 如果用豆包，改为 "doubao-pro"
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"剧本内容：\n{script_text}"}
