@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import json
-from docx import Document
+
 # ==================== 设置网页界面 ====================
 st.set_page_config(page_title="科幻导演技能 AI", layout="wide")
 st.title("🚀 科幻导演 AI 助理")
