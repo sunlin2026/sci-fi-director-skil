@@ -7,7 +7,29 @@ st.set_page_config(page_title="科幻导演技能 AI", layout="wide")
 st.title("🚀 科幻导演 AI 助理")
 st.markdown("请输入您的科幻故事，AI会自动分析锚点并生成镜头提示词。")
 
-user_script = st.text_area("📝 请输入剧本或故事梗概：", height=200, placeholder="例如：一个宇航员登陆未知星球，发现了一个巨大的蓝色发光遗迹...")
+# ==================== 文件上传 + 文本输入区 ====================
+uploaded_file = st.file_uploader("📁 上传您的科幻剧本文件 (支持 .txt, .md 格式)", type=['txt', 'md'])
+
+user_script = ""
+
+if uploaded_file is not None:
+    # 读取上传文件的内容
+    try:
+        stringio = uploaded_file.getvalue().decode("utf-8")
+        user_script = stringio
+        st.success(f"✅ 已成功读取文件：{uploaded_file.name}")
+    except Exception as e:
+        st.error(f"文件读取失败，请检查格式：{e}")
+
+# 仍然保留一个手动输入框（防止用户不想传文件，或者传错了）
+st.markdown("---")
+manual_text = st.text_area("✍️ 或者直接在这里输入/粘贴剧本内容：", height=150, placeholder="如果您不想上传文件，直接在这里输入剧本...")
+
+# 逻辑判断：如果上传了文件，就用文件内容；没上传文件且手动框有字，就用手动输入的内容
+if user_script == "" and manual_text != "":
+    user_script = manual_text
+
+# ==================== 下面是您的 API Key 配置 ====================
 
 # ==================== 这里配置您的 API Key ====================
 # 如果您用的是 DeepSeek，替换成您的 DeepSeek API Key
