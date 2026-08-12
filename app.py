@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import json
-
+from docx import Document
 # ==================== 设置网页界面 ====================
 st.set_page_config(page_title="科幻导演技能 AI", layout="wide")
 st.title("🚀 科幻导演 AI 助理")
@@ -52,14 +52,14 @@ def analyze_with_ai(script_text):
     3. 推荐镜头：描述推荐使用的景别、运镜和风格。
     请用中文回答，保持电影级专业术语。
     """
-    payload = {
+        payload = {
         "model": "deepseek-v4-flash",  # 改用这个最新模型
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"剧本内容：\n{script_text}"}
         ],
         "temperature": 0.7,
-        "reasoning_effort": "low"  # <--- 加上这一行，关掉思考模式，更省Token且更快！
+        "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
     }
     try:
         response = requests.post(url, headers=headers, json=payload)
