@@ -12,7 +12,7 @@ user_script = st.text_area("📝 请输入剧本或故事梗概：", height=200,
 # ==================== 这里配置您的 API Key ====================
 # 如果您用的是 DeepSeek，替换成您的 DeepSeek API Key
 # 如果您用的是 豆包/OpenAI，替换成对应的 Key
-API_KEY = sk-cafd2efdc3db49e89f7764d1b5406b7b # <--- 把这里换成您的真实 Key
+API_KEY ="sk-cafd2efdc3db49e89f7764d1b5406b7b"# <--- 把这里换成您的真实 Key
 
 # ==================== 核心智能逻辑 ====================
 def analyze_with_ai(script_text):
