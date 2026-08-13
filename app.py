@@ -78,8 +78,8 @@ payload = {
         ],
         "temperature": 0.7,
         "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
-    }
-   try：
+        }
+try:
         response = requests.post(url, headers=headers, json=payload)
         result = response.json()
         # 提取AI真正回答的内容
