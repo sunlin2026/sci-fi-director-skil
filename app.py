@@ -1,25 +1,40 @@
 import streamlit as st
 import requests
 import json
-
+from docx import Document
 # ==================== 设置网页界面 ====================
 st.set_page_config(page_title="科幻导演技能 AI", layout="wide")
 st.title("🚀 科幻导演 AI 助理")
 st.markdown("请输入您的科幻故事，AI会自动分析锚点并生成镜头提示词。")
 
 # ==================== 文件上传 + 文本输入区 ====================
-uploaded_file = st.file_uploader("📁 上传您的科幻剧本文件 (支持 .txt, .md 格式)", type=['txt', 'md'])
+# ==================== 文件上传 + 文本输入区 ====================
+uploaded_file = st.file_uploader("📁 上传您的科幻剧本文件 (支持 .txt, .md, .docx 格式)", type=['txt', 'md', 'docx'])
 
 user_script = ""
 
 if uploaded_file is not None:
     # 读取上传文件的内容
     try:
-        stringio = uploaded_file.getvalue().decode("utf-8")
-        user_script = stringio
+        # 如果是 txt 或 md 文件
+        if uploaded_file.name.endswith('.txt') or uploaded_file.name.endswith('.md'):
+            stringio = uploaded_file.getvalue().decode("utf-8")
+            user_script = stringio
+        
+        # 如果是 docx 文件（Word文档）
+        elif uploaded_file.name.endswith('.docx'):
+            # 引入读取 Word 的库
+            doc = Document(uploaded_file)
+            # 将 Word 里的所有段落提取出来合成一段完整的文字
+            full_text = []
+            for para in doc.paragraphs:
+                full_text.append(para.text)
+            user_script = "\n".join(full_text)
+            
         st.success(f"✅ 已成功读取文件：{uploaded_file.name}")
     except Exception as e:
         st.error(f"文件读取失败，请检查格式：{e}")
+       
 
 # 仍然保留一个手动输入框（防止用户不想传文件，或者传错了）
 st.markdown("---")
