@@ -79,13 +79,58 @@ payload = {
         "temperature": 0.7,
         "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
         }
-try:
+def analyze_with_ai(script_text):
+    url = "https://api.deepseek.com/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    # 这里是让它扮演"科幻导演"的专业指令
+    system_prompt = """
+请参考您知识库中的"7大科幻视觉流派参考库"，在每一步（世界锚点、视觉核心、提示词）中，明确指出本片主要参考了哪个流派，并以此风格为基础进行创作。
+
+你是一个顶级的科幻电影视觉策划师。请根据用户提供的剧本，输出一份专业的视觉执行方案。
+
+请务必按以下格式和板块输出，每个部分都要详细：
+
+1. 人物定位与介绍：分析主要角色的性格特征、职业背景、核心动机和人物弧光。
+
+2. 世界锚点：描述该世界的核心物理规律、生态规则或科技设定。
+
+3. 视觉核心与画面描述：描绘故事中最震撼、最核心的场景画面（需包含色彩、构图、光影、质感描写）。
+
+4. AI 绘画提示词 (Midjourney/SD/即梦/小云雀 通用)：
+- 必须提供 3 个核心画面。
+- 每个画面需要分别提供：
+  * 【中文版】：详细的中文画面描述（包含主体、环境、景别、光影、风格）。
+  * 【英文版】：对应的专业英文 Prompt，用于 Midjourney、SD 等海外工具（必须为纯英文，用逗号分隔）。
+
+5. 视频分镜脚本 (Storyboard)：
+- 提供 3 个核心分镜。
+- 每个分镜需包含：景别（如大远景）、运镜（如缓慢推入/平移）、时长（秒）、画面内容描述。
+
+【极重要指令】：请严格按照第1至第5条的五个板块输出，千万不要在开头和结尾添加任何寒暄语或废话。输出完成后直接结束！
+    """
+
+    payload = {
+        "model": "deepseek-v4-flash",  # 改用这个最新模型
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"剧本内容：\n{script_text}"}
+        ],
+        "temperature": 0.7,
+        "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
+    }
+
+    try:
         response = requests.post(url, headers=headers, json=payload)
         result = response.json()
         # 提取AI真正回答的内容
         return result["choices"][0]["message"]["content"]
-except Exception as e:    
+    except Exception as e:
         return f"出错了：{str(e)}\n\n请检查您的 API Key 是否填写正确。"
+
 
 # ==================== 运行按钮 ====================
 if st.button("🎬 生成分析报告"):
@@ -93,8 +138,8 @@ if st.button("🎬 生成分析报告"):
         with st.spinner("AI 正在思考中，请稍候..."):
             # 把用户输入发给真实AI
             result_text = analyze_with_ai(user_script)
-            
-            st.success("分析完成！")
-            st.markdown(result_text)
+        
+        st.success("分析完成！")
+        st.markdown(result_text)
     else:
         st.warning("⚠️ 请先写点剧情再点击生成！")
