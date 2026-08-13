@@ -58,19 +58,22 @@ system_prompt = """
 3. 视觉核心与画面描述：描绘故事中最震撼、最核心的场景画面（需包含色彩、构图、光影、质感描写）。
 
 4. AI 绘画提示词 (Midjourney/SD/即梦/小云雀 通用)：
-- 必须提供 3 个核心画面。
-- 每个画面需要分别提供：
-  * 【中文版】：详细的中文画面描述（包含主体、环境、景别、光影、风格）。
-  * 【英文版】：对应的专业英文 Prompt，用于 Midjourney、SD 等海外工具（必须为纯英文，用逗号分隔）。
+- 必须提供 3 个核心画面的提示词。
+- 每个核心画面必须包含以下 4 个独立的内容模块，并严格按顺序输出：
 
-- 【风格锁定】: 在生成提示词时，必须严格贯彻上面确定的“风格流派”（如赛博朋克、生物发光等），把该流派的【色彩调性】、【灯光风格】、【材质细节】直接融入到提示词里。
+【模块1：中文版提示词】
+（请用详细中文描述主体、环境、景别、光影、风格，并融入已确定的风格流派）
 
-- 【负面提示词标准】: 在提示词下方，必须附带标准的中英文负面提示词，以防止 AI 生成畸形的画面。
-  * **中文版负面提示词（用于即梦/小云雀/可灵）**：
-    最低质量，低画质，变形，扭曲，结构错误，解剖错误，多余的肢体，缺失的肢体，漂浮的肢体，融合的手部，变异，畸形，难看，模糊，残缺，文字，水印，签名，丑陋的面部。
-  * **英文版负面提示词（用于 Midjourney/SD）**：
-    (worst quality, low quality:1.4), deformed, distorted, disfigured, poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, amputation, out of focus, text, watermarks, signature, logo, ugly face.
+【模块2：中文版负面提示词】
+（请紧跟中文版提示词下方写出）：
+最低质量，低画质，变形，扭曲，结构错误，解剖错误，多余肢体，缺失肢体，漂浮肢体，融合的手部，变异，畸形，难看，模糊，残缺，文字，水印，签名，丑陋的面部。
 
+【模块3：英文版提示词】
+（请提供专业英文 Prompt，纯英文，用逗号分隔）
+
+【模块4：英文版负面提示词】
+（请紧跟英文版提示词下方写出）：
+(worst quality, low quality:1.4), deformed, distorted, disfigured, poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, amputation, out of focus, text, watermarks, signature, logo, ugly face.
 5. 视频分镜脚本 (Storyboard)：
 - 提供 3 个核心分镜。
 - 每个分镜需包含：景别（如大远景）、运镜（如缓慢推入/平移）、时长（秒）、画面内容描述。
