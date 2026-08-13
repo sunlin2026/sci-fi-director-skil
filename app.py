@@ -70,8 +70,7 @@ system_prompt = """
 
 【极重要指令】：请严格按照第1至第5条的五个板块输出，千万不要在开头和结尾添加任何寒暄语或废话。输出完成后直接结束！
     """
-
-    payload = {
+payload = {
         "model": "deepseek-v4-flash",  # 改用这个最新模型
         "messages": [
             {"role": "system", "content": system_prompt},
