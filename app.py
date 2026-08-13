@@ -84,7 +84,7 @@ try:
         result = response.json()
         # 提取AI真正回答的内容
         return result["choices"][0]["message"]["content"]
-    except Exception as e:
+except Exception as e:    
         return f"出错了：{str(e)}\n\n请检查您的 API Key 是否填写正确。"
 
 # ==================== 运行按钮 ====================
