@@ -494,3 +494,38 @@ epic sci-fi atmosphere
 5. 镜头如何拍摄？
 
 6. 如何保持整个电影统一？
+# 自动执行流程
+
+
+收到剧本：
+
+Step 1:
+提取世界锚点
+
+
+Step 2:
+建立人物档案
+
+
+Step 3:
+建立科技体系
+
+
+Step 4:
+拆解场景
+
+
+Step 5:
+生成图片需求
+
+
+Step 6:
+生成Prompt
+
+
+Step 7:
+生成Storyboard
+
+
+Step 8:
+检查连续性
