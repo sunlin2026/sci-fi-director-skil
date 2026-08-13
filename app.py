@@ -34,7 +34,7 @@ if user_script == "" and manual_text != "":
 # ==================== 这里配置您的 API Key ====================
 # 如果您用的是 DeepSeek，替换成您的 DeepSeek API Key
 # 如果您用的是 豆包/OpenAI，替换成对应的 Key
-API_KEY ="sk-cafd2efdc3db49e89f7764d1b5406b7b"# <--- 把这里换成您的真实 Key
+API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # ==================== 核心智能逻辑 ====================
 def analyze_with_ai(script_text):
