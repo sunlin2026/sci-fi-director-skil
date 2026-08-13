@@ -70,15 +70,7 @@ system_prompt = """
 
 【极重要指令】：请严格按照第1至第5条的五个板块输出，千万不要在开头和结尾添加任何寒暄语或废话。输出完成后直接结束！
     """
-payload = {
-        "model": "deepseek-v4-flash",  # 改用这个最新模型
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"剧本内容：\n{script_text}"}
-        ],
-        "temperature": 0.7,
-        "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
-        }
+
 def analyze_with_ai(script_text):
     url = "https://api.deepseek.com/v1/chat/completions"
     headers = {
