@@ -114,13 +114,13 @@ def analyze_with_ai(script_text):
     """
 
     payload = {
-        "model": "deepseek-v4-flash",  # 改用这个最新模型
+        "model": "deepseek-v4-flash",
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"剧本内容：\n{script_text}"}
         ],
         "temperature": 0.7,
-        "reasoning_effort": "low"  # 关掉思考模式，更省Token且更快！
+        "reasoning_effort": "low"
     }
 
     try:
@@ -143,3 +143,4 @@ if st.button("🎬 生成分析报告"):
         st.markdown(result_text)
     else:
         st.warning("⚠️ 请先写点剧情再点击生成！")
+     
